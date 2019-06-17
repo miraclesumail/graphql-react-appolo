@@ -81,7 +81,6 @@ export default class LinkList extends Component {
                 </div>
                 )}
             </ApolloConsumer>
-
         </div>  
       )
     }

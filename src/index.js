@@ -4,7 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { setContext } from 'apollo-link-context'
-
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from './store'
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
@@ -32,9 +34,13 @@ const client = new ApolloClient({
 })
 
 ReactDOM.render(
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>,
+   <BrowserRouter>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+              <App />
+        </Provider> 
+      </ApolloProvider>
+    </BrowserRouter>,
     document.getElementById('root')
   )
 
