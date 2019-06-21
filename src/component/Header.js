@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import store from '../store'
 
 class Header extends Component {
   render() {
-      console.log(store.getState())
     return (
       <div >
         <div className="flex flex-fixed black">

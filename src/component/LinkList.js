@@ -4,6 +4,8 @@ import gql from 'graphql-tag'
 import Link from './Link'
 import CreateLink from './CreateLink'
 
+var O = require('observed')
+
 const FEED_QUERY = gql`
 {
   feed { 
@@ -32,7 +34,25 @@ const Link_QUERY = gql`
 export default class LinkList extends Component {
     state = {
         searchUrl: '',
-        links: []
+        links: [],
+        info: {
+            gender: 'male'
+        }
+    }
+
+    componentDidMount(){
+        var object = { name: { last: 'Heckmann', first: 'aaron' }}
+var ee = O(object)
+ 
+ee.on('update name.first', console.log)
+ 
+object.name.first = 'Aaron'
+     //   ob.on('update gender', console.log)
+
+        setTimeout(() => {
+             var info = {gender: 'female'}
+             this.setState({info})
+        }, 3000)
     }
 
     render() {
