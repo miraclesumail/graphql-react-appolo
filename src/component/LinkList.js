@@ -4,8 +4,6 @@ import gql from 'graphql-tag'
 import Link from './Link'
 import CreateLink from './CreateLink'
 
-var O = require('observed')
-
 const FEED_QUERY = gql`
 {
   feed { 
@@ -37,22 +35,12 @@ export default class LinkList extends Component {
         links: [],
         info: {
             gender: 'male'
-        }
+        },
+        play: true
     }
 
-    componentDidMount(){
-        var object = { name: { last: 'Heckmann', first: 'aaron' }}
-var ee = O(object)
- 
-ee.on('update name.first', console.log)
- 
-object.name.first = 'Aaron'
-     //   ob.on('update gender', console.log)
-
-        setTimeout(() => {
-             var info = {gender: 'female'}
-             this.setState({info})
-        }, 3000)
+    toggle = () => {
+        this.setState({play: !this.state.play})
     }
 
     render() {
@@ -101,6 +89,15 @@ object.name.first = 'Aaron'
                 </div>
                 )}
             </ApolloConsumer>
+
+            <div className="circle">
+                 <div className={this.state.play ? 'minute' : 'minute stop'}></div>
+                 <div className={this.state.play ? 'second' : 'second stop'}></div>    
+            </div>
+
+            <button onClick={this.toggle}>
+               {this.state.play ? '暂停' : '继续'}
+            </button>
         </div>  
       )
     }

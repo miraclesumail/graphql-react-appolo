@@ -3177,13 +3177,6 @@ date-now@^0.1.4:
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
   integrity sha1-6vQ5/U1ISK105cx9vvIAZyueNFs=
 
-debug@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.1.1.tgz#e0c548cc607adc22b537540dc3639c4236fdf90c"
-  integrity sha1-4MVIzGB63CK1N1QNw2OcQjb9+Qw=
-  dependencies:
-    ms "0.6.2"
-
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -6378,11 +6371,6 @@ move-concurrently@^1.0.1:
     rimraf "^2.5.4"
     run-queue "^1.0.3"
 
-ms@0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/ms/-/ms-0.6.2.tgz#d89c2124c6fdc1353d65a8b77bf1aac4b193708c"
-  integrity sha1-2JwhJMb9wTU9Zai3e/GqxLGTcIw=
-
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -6719,13 +6707,6 @@ object.values@^1.1.0:
     es-abstract "^1.12.0"
     function-bind "^1.1.1"
     has "^1.0.3"
-
-observed@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/observed/-/observed-1.1.2.tgz#17a78fc56d56ad941315e95d54041e2c2ade2f6f"
-  integrity sha1-F6ePxW1WrZQTFeldVAQeLCreL28=
-  dependencies:
-    debug "2.1.1"
 
 obuf@^1.0.0, obuf@^1.1.2:
   version "1.1.2"

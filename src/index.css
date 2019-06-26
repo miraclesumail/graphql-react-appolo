@@ -11,3 +11,48 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.circle {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border: 1px solid yellowgreen;
+  border-radius: 50%;
+}
+
+.second {
+  position: absolute;
+  width: 6px;
+  height: 42px;
+  background: #f5d300;
+  left: 47px;
+  top: 10px;
+  transform-origin: 50% 100%;
+  animation: pointer 10s steps(60, end) infinite;
+}
+
+.minute {
+  position: absolute;
+  width: 6px;
+  height: 35px;
+  background: #d67d16;
+  left: 47px;
+  top: 15px;
+  transform-origin: 50% 100%;
+  animation: pointer 600s steps(60, end) infinite;
+}
+
+@keyframes pointer {
+    from { 
+      -webkit-transform: rotate(0deg); 
+      transform: rotate(0deg);
+    }
+    100% { 
+      -webkit-transform: rotate(360deg); 
+      transform: rotate(360deg);
+    }
+}
+
+.stop{
+    animation-play-state: paused;
+}
