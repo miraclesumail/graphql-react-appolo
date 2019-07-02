@@ -1,0 +1,54 @@
+.container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div{
+    box-sizing: border-box
+}
+
+.button-container{
+    width: 150px;
+    height: 150px;
+    position: relative;
+}
+
+.button-container div {
+    background: yellowgreen;
+    border-radius: 10px;
+    line-height: 40px;
+    text-align: center
+}
+
+.left{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 55px;
+    left: 0;
+}
+
+.up{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 55px;
+}
+
+.right{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 55px;
+    right: 0;
+}
+
+.down{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    bottom: 0;
+    left: 55px;
+}

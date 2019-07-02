@@ -7,14 +7,14 @@ class Header extends Component {
     return (
       <div >
         <div className="flex flex-fixed black">
-          <div className="fw7 mr1">Hacker News</div>
+          {/* <div className="fw7 mr1">Hacker News</div>
           <Link to="/" className="ml1 no-underline black">
             new
           </Link>
           <div className="ml1">|</div>
           <Link to="/create">
             submit
-          </Link>
+          </Link> */}
           
           <button onClick={() => this.props.history.push('/music')}>to music</button>
         </div>

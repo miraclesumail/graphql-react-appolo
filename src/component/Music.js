@@ -69,6 +69,8 @@ class Music extends Component {
                      )
                  }       
              );
+             
+            //this.props.history.push('/')
         }, 3000)
     }
 
@@ -146,6 +148,43 @@ console.log(info);
         });
     }
 
+    uploadFile = (e) => {
+        e.preventDefault();
+        let formData = new FormData();
+        var fileField = document.querySelector("input[type='file']");
+        for(let i = 0; i < fileField.files.length; i++) {
+            formData.append('file', fileField.files[i]);
+        }
+       
+        console.log(fileField.files);
+        setTimeout(() => {
+            console.log(formData);
+        }, 2000)
+
+        fetch('http://192.168.84.115:3000/customer/upload', {
+             method: 'POST',
+            //  headers: {
+            //      'Content-Type': 'multipart/form-data'
+            //  },
+             body: formData
+        }).then(res => console.log('dddd'))
+
+        // fetch('http://192.168.84.115:3000/customer/createLottery', {
+        //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        //     mode: 'cors', // no-cors, cors, *same-origin
+        //     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         // 'Content-Type': 'application/x-www-form-urlencoded',
+        //     },
+        //     body: JSON.stringify(submitData) // body data type must match
+        // })
+        // .then(response => {
+        //       console.log(response.json());
+        //       this.props.emptyLottery();
+        // })
+    }
+
     render() {
         const {singer, musics, client, user_name, email, gender, address, description, phone, login_name, login_email} = this.state;
         return (
@@ -184,6 +223,11 @@ console.log(info);
                  <div><input value={login_name} placeholder='input name' onChange={(e) => this.setState({login_name: e.target.value})}/></div>
                  <div><input value={login_email} placeholder='input email' onChange={(e) => this.setState({login_email: e.target.value})}/></div>
                  <button onClick={this.login}>提交</button>
+
+                 <form method="post">
+                    <input type="file" name="avatar" multiple/>
+                    <button onClick={this.uploadFile}>Submit</button>
+                 </form>
             </div>
         )
     }

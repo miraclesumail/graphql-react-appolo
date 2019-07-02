@@ -3,6 +3,7 @@ import { Query, ApolloConsumer } from 'react-apollo'
 import gql from 'graphql-tag'
 import Link from './Link'
 import CreateLink from './CreateLink'
+import logo from '../index.svg';
 
 const FEED_QUERY = gql`
 {
@@ -16,6 +17,12 @@ const FEED_QUERY = gql`
       }  
   }
 }
+`
+
+const IS_LOGIN = gql`
+  query IsUserLoggedIn {
+    isLogin @client
+  }
 `
 
 const Link_QUERY = gql`
@@ -46,6 +53,7 @@ export default class LinkList extends Component {
     render() {
       return (
         <div>
+            <img src={logo} className="App-logo" alt="logo" />
             <Query query={FEED_QUERY} notifyOnNetworkStatusChange>
                 {({ loading, error, data, refetch, networkStatus }) => {
                     if (networkStatus === 4) return <div>Refetching!</div>;
@@ -62,7 +70,10 @@ export default class LinkList extends Component {
                     )
                 }}
             </Query>
-
+           
+            <Query query={IS_LOGIN}>
+                  {({ data }) => (data.isLogin ? <div>{data.isLogin}</div> : <div>wwwwwww</div>)}
+            </Query>
             <div><input placeholder="申诉书" value={this.state.searchUrl} onChange={e => this.setState({searchUrl: e.target.value})}/></div> 
             
             <ApolloConsumer>
