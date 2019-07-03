@@ -35,9 +35,12 @@ export class Snake extends Component {
          this.setState({foodAxis: [verticalIndex, horizonIndex]})   
     }
 
+    initNum(){
+         
+    }
+
     renderFood = () => {
          if(!this.state.foodAxis) return null;
-         console.log('我有哟鱼鱼鱼也');
          const [verticalIndex, horizonIndex] = this.state.foodAxis;
          const width = 1/this.props.renderLines[1]*document.body.clientWidth;
          const style = {
@@ -47,7 +50,8 @@ export class Snake extends Component {
               left: horizonIndex*width,
               top: verticalIndex*width,
               zIndex: 10,
-              background: 'chocolate'
+              background: 'chocolate',
+              border:'1px solid yellow'
          }
          return <div style={style}>
 
@@ -56,7 +60,6 @@ export class Snake extends Component {
 
     getInitActiveGrid = () => {
         const { direction, initNum } = this.state;
-        console.log(direction, 'directiondirectiondirectiondirectiondirection');
         const [vertical, horizon] = this.props.renderLines;
         let activeGrid = [], horizonIndex, verticalIndex;
         switch (direction) {
@@ -85,15 +88,14 @@ export class Snake extends Component {
                    }
                    break;       
         }
-        console.log(activeGrid, 'activeGridactiveGridactiveGridactiveGrid');
         this.setState({activeGrid})
     }
 
     movingSnake = () => {
          this.timer = setInterval(() => {
-              let { direction, activeGrid } = this.state;
+              let { direction, activeGrid, foodAxis } = this.state;
               let leadGrid = activeGrid[0].slice();
-              console.log(leadGrid, 'leadGridleadGridleadGridleadGrid');
+
               switch (direction) {
                     case 'up':
                        leadGrid = [leadGrid[0] - 1, leadGrid[1]];
@@ -109,15 +111,21 @@ export class Snake extends Component {
                        break;   
               }
 
-              for(let i = activeGrid.length - 1; i >= 0; i--) {
-                    if(!i)
-                       activeGrid[i] = leadGrid;
-                    else
-                       activeGrid[i] = activeGrid[i - 1];   
+              // 吃到了蛇肉
+              if(foodAxis.length && JSON.stringify(foodAxis) == JSON.stringify(leadGrid)) {
+                    activeGrid = [leadGrid, ...activeGrid];
+                    this.generateFoodAxis();
+              } else {
+                    for(let i = activeGrid.length - 1; i >= 0; i--) {
+                        if(!i)
+                           activeGrid[i] = leadGrid;
+                        else
+                           activeGrid[i] = activeGrid[i - 1];   
+                    }
               }
-              console.log(activeGrid);
-              this.setState({activeGrid: activeGrid})
-         }, 1000)
+  
+              this.setState({activeGrid})
+         }, 600)
     }
 
     changeDirection = (e) => {
@@ -139,7 +147,7 @@ export class Snake extends Component {
          const { activeGrid } = this.state; 
          const [vertical, horizon] = this.props.renderLines;
          const width = 1/horizon*document.body.clientWidth;
-         const style = {width, height: width}
+         const style = {width, height: width,  border:'1px solid yellow'}
 
          return  Array.from({length: vertical}).map((item, index) => {
                return Array.from({length: horizon}).map((ele, order) => (

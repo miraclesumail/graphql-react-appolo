@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    position: relative;
 }
 
 div{
@@ -51,4 +52,13 @@ div{
     height: 40px;
     bottom: 0;
     left: 55px;
+}
+
+.g-container {
+    width: 8rem;
+    height: 8rem;
+    position: fixed;
+    top: calc(50% - 4rem);
+    left: calc(50% - 4rem);
+    background: pink;
 }

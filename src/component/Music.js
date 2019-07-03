@@ -1,9 +1,48 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useCallback, useMemo } from 'react'
 import { Query, ApolloConsumer } from 'react-apollo'
 import { connect } from 'react-redux'
 import gql from 'graphql-tag'
 import * as _ from "lodash"
 import PropTypes from 'prop-types'
+
+const functions = new Set();
+
+const CounterBtn = React.memo(({onClick, count}) => {
+      console.log('render useMemouseMemouseMemouseMemo');
+      return <button onClick={onClick}>{count}</button>
+})
+
+const App = () => {
+  const [c1, setC1] = useState(0);
+  const [c2, setC2] = useState(0);
+
+  const increment1 = useCallback(() => {setC1(c1 + 1)}, [c1])
+  const increment2 = useCallback(() => {setC2(c2 + 1)}, [])
+
+  const incrementBoth = useCallback(() => {
+        increment1();
+        increment2()
+  }, [increment1, increment2])
+
+  // Register the functions so we can count them
+  functions.add(increment1);
+  functions.add(increment2);
+
+  return (<div>
+    <div> Counter 1 is {c1} </div>
+    <div> Counter 2 is {c2} </div>
+    <br/>
+    <div>
+        <CounterBtn count={c1} onClick={increment1}/>
+        <CounterBtn count={c2} onClick={increment2}/>
+      {/* <button onClick={increment1}>Increment Counter 1</button>
+      <button onClick={increment2}>Increment Counter 2</button> */}
+      <button onClick={incrementBoth}>Increment Both</button>
+    </div>
+    <br/>
+    <div> Newly Created Functions: {functions.size - 2} </div>
+  </div>)
+}
 
 const Music_QUERY = gql`
   query GetMusics($singer: String!){
@@ -69,7 +108,7 @@ class Music extends Component {
                      )
                  }       
              );
-             
+
             //this.props.history.push('/')
         }, 3000)
     }
@@ -209,7 +248,7 @@ console.log(info);
                            <div>{item.name} -- {item.singer}</div>
                        )) : null
                  }
-
+                 <App/>
                  <div><input value={user_name} onChange={(e) => this.setState({user_name: e.target.value})}/></div>
                  <div><input value={email} onChange={(e) => this.setState({email: e.target.value})}/></div>
                  <div><input value={gender} onChange={(e) => this.setState({gender: e.target.value})}/></div>

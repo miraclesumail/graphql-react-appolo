@@ -7,7 +7,53 @@ import Snake from './component/Snake'
 import { withRouter } from 'react-router'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { Switch, Route } from 'react-router-dom'
+import Loadable from "react-loadable"
 
+//Loadable.preloadAll
+
+const routeConfig = [
+    {
+        path: '/',
+        exact: true,
+        component: Loadable({
+          loader: () => import('./component/LinkList'),
+          loading: () => <div />
+        })   
+    },
+    {
+        path: '/create',
+        exact: true,
+        component: Loadable({
+          loader: () => import('./component/CreateLink'),
+          loading: () => <div />
+        })
+    },
+    {
+        path: '/music',
+        exact: true,
+        component: Loadable({
+          loader: () => import('./component/Music'),
+          loading: () => <div />
+        }),
+        //delay: 1000
+    }, 
+    {
+        path: '/snake',
+        exact: true,
+        component: Loadable({
+          loader: () => import('./component/Snake'),
+          loading: () => <div />
+        })      
+    },
+    {
+      path: '/touch',
+      exact: true,
+      component: Loadable({
+        loader: () => import('./component/Touch'),
+        loading: () => <div />
+      })      
+    }
+]
 
 class App extends Component {
 
@@ -26,7 +72,12 @@ class App extends Component {
                   }}
               >
                   <Switch>
-                    <Route exact path="/" component={props => {
+                    {
+                       routeConfig.map((item, index) => (
+                           <Route key={index} exact={item.exact} path={item.path} component={item.component}/>
+                       ))
+                    }
+                    {/* <Route exact path="/" component={props => {
                           return <LinkList/>
                     }} />
                     <Route exact path="/create" component={props => {
@@ -35,7 +86,7 @@ class App extends Component {
                     <Route exact path="/music" component={props => {
                           return <Music {...props}/>
                     }} />
-                    <Route exact path="/snake" component={Snake} />
+                    <Route exact path="/snake" component={Snake} /> */}
                   </Switch>
               </CSSTransition>
            </TransitionGroup>       

@@ -295,6 +295,13 @@ module.exports = function(webpackEnv) {
     module: {
       strictExportPresence: true,
       rules: [
+        // {
+        //   test: /\.(js|jsx)$/,
+        //   use: [
+        //     'babel-loader',
+        //     'lazyload-loader',
+        //   ]
+        // },
         // Disable require.ensure as it's not a standard language feature.
         { parser: { requireEnsure: false } },
 
@@ -312,6 +319,7 @@ module.exports = function(webpackEnv) {
               },
               loader: require.resolve('eslint-loader'),
             },
+
           ],
           include: paths.appSrc,
         },
@@ -336,6 +344,10 @@ module.exports = function(webpackEnv) {
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: paths.appSrc,
+              // use: [
+              //   'babel-loader',
+              //   'lazyload-loader',
+              // ],
               loader: require.resolve('babel-loader'),
               options: {
                 customize: require.resolve(
